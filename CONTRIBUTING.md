@@ -12,6 +12,8 @@ Thanks for helping improve `@esdecode/license-checker`.
 
 ## Development
 
+Development requires Node.js 22.12+ (Vitest 5 and ESLint 10). The published package itself runs on Node.js 18+; CI verifies the built output on Node.js 18 and 20 with `npm run smoke:runtime`.
+
 ```bash
 npm install
 npm test
