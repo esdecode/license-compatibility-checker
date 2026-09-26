@@ -120,7 +120,9 @@ export function analyzeSourceCodeAcquisition(input: AcquisitionInput): Acquisiti
         { proprietaryIsOwnCode: false },
       )
     : null;
-  const s = project.sections;
+  // The main licence is covered by mainCheck; sections combine it with third-party findings only,
+  // so the main licence is not reported twice.
+  const s = (thirdPartyProject ?? analyzeProject({ licenses: [] })).sections;
 
   const thirdPartyComponents: RiskSection = thirdPartyProject
     ? section(

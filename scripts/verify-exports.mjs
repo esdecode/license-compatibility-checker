@@ -47,3 +47,9 @@ assert(
 );
 
 console.log(`OK: ${Object.keys(api).length} exports, no runtime or framework dependencies, README examples hold.`);
+
+// CommonJS consumers on Node 22+ load the ESM build through require(esm) via the "default" condition.
+const { createRequire } = await import("node:module");
+const required = createRequire(import.meta.url)("@esdecode/license-checker");
+if (typeof required.checkCompatibility !== "function") throw new Error("require() consumers cannot load the package");
+console.log("OK: require() resolves the package.");

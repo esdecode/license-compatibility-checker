@@ -4,6 +4,18 @@ All notable changes to this project are documented here. The format follows [Kee
 
 ## [Unreleased]
 
+## [0.1.2] - 2026-09-26
+
+### Fixed
+
+- `analyzeSourceCodeAcquisition()` no longer reports the main project licence twice in a section; sections now combine the main-licence check with third-party findings only.
+
+## [0.1.1] - 2026-09-26
+
+### Fixed
+
+- Added a `default` export condition so CommonJS consumers (and tools such as `tsx` running CJS) can load the package via native `require(esm)`.
+
 ## [0.1.0] - 2026-09-26
 
 ### Added

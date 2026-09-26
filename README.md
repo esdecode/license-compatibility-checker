@@ -20,7 +20,7 @@ Built by [ESDecode](https://esdecode.com).
 npm install @esdecode/license-checker
 ```
 
-Requires Node.js 18+. The package is ESM-only.
+Requires Node.js 18+. The package is published as ESM; CommonJS projects can `require()` it on Node.js 20.19+ / 22.12+ (native `require(esm)`).
 
 ## Quick start
 

@@ -1,6 +1,6 @@
 {
   "name": "@esdecode/license-checker",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "description": "Deterministic, directional software license compatibility engine with project and source-code acquisition analyzers. Not legal advice.",
   "type": "module",
   "license": "MIT",
@@ -33,7 +33,8 @@
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/index.js"
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
     },
     "./package.json": "./package.json"
   },

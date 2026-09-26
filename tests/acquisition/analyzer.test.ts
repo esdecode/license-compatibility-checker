@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { analyzeSourceCodeAcquisition } from "../../src/index.js";
-import type { AcquisitionInput } from "../../src/index.js";
+import type { AcquisitionInput, RiskSection } from "../../src/index.js";
 
 const base: AcquisitionInput = {
   mainProjectLicense: "Proprietary",
@@ -16,6 +16,19 @@ const base: AcquisitionInput = {
 const topics = (input: AcquisitionInput) => analyzeSourceCodeAcquisition(input).sellerQuestions.map((q) => q.topic);
 
 describe("analyzeSourceCodeAcquisition", () => {
+  it("reports the main licence once per section", () => {
+    const report = analyzeSourceCodeAcquisition({
+      ...base,
+      thirdPartyLicenses: ["MIT", "GPL-3.0"],
+      redistribution: true,
+    });
+    for (const [key, section] of Object.entries(report.sections) as [string, RiskSection][]) {
+      const mainDetails = section.details.filter((detail) => detail.startsWith("Proprietary"));
+      expect(mainDetails.length, key).toBeLessThanOrEqual(1);
+    }
+    expect(report.sections.redistribution.inputs).toEqual(expect.arrayContaining(["Proprietary", "GPL-3.0"]));
+  });
+
   it("returns all report sections", () => {
     const report = analyzeSourceCodeAcquisition(base);
     expect(Object.keys(report.sections).sort()).toEqual(
